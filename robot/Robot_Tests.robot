@@ -95,7 +95,7 @@ Endpoint DFU with Backlog and Battery Constraints
     Should Be Equal As Integers    ${rc}    200
     ${ep1_after}=    Api Get Endpoint By Serial    ${ep1_serial}
     Should Be Equal As Integers    ${ep1_after["version"]}    0
-
+    
     # Drain backlog -> update should happen
     ${rc}=    Api Set Endpoint Backlog    ${ep1_serial}    0
     Should Be Equal As Integers    ${rc}    200

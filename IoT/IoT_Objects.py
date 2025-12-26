@@ -51,6 +51,7 @@ class Endpoint:
     
     def set_version(self, version):
         self.version = version
+        
     def get_version(self):
         return self.version
     
@@ -74,7 +75,7 @@ class Endpoint:
         hw_type_upper = self.hardware_type.upper()
         return va_upper.startswith(hw_type_upper)
     
-        # Logic methods
+    # Logic methods
     def dfu_update(self, version_artifact:str):
         version_number = int(version_artifact.split("_")[-1][:-4])
         if version_number <= self.version: # no update needed
