@@ -3,22 +3,32 @@ from IoT_Objects import Node
 class Env:
     def __init__(self):
         self.nodes = [Node("ahn2"),Node("cassia"),Node("moxa")]
-        for node in self.nodes:
-            print(f"Node UUID: {node.uuid}")
-            for ep in node.endpoints:
-                print(f"Endpoint Serial Number: {ep.get_serial_number()}")
-                
+        # map ota_channel -> current artifact/version
+        self.ota_channels = {node.get_ota_channel(): None for node in self.nodes}
+        
     def reset_env(self):
         self.__init__()
+        global starting_sn,starting_string
+        starting_string = 0xA0000
+        starting_sn = 1000 
         
+    def debug_print(self):
+        for node in self.nodes:
+                    print(f"Node UUID: {node.uuid}")
+                    for ep in node.endpoints:
+                        print(f"Endpoint Serial Number: {ep.get_serial_number()}")
     def get_node(self, uuid: str) -> dict:
         for node in self.nodes:
             if node.uuid == uuid:
+                ep_list = []
+                for ep in node.endpoints:
+                        ep_serial = ep.get_serial_number()
+                        ep_list.append(ep_serial)
                 node_data = {
                     "uuid": node.get_uuid(),
                     "ota_channel": node.get_ota_channel(),
                     "version": node.get_version(),
-                    "Endpoints": [node.endpoints]
+                    "Endpoints": ep_list
                 }
                 return node_data
         return None
@@ -38,10 +48,13 @@ class Env:
         return None
     
     def post_version_to_ota_channel(self, ota_channel: str, version_artifact: str):
-        for node in self.nodes:
-            if node.update_version(ota_channel, version_artifact):
-                return True
-        return False
+        if ota_channel in self.ota_channels:
+            self.ota_channels[ota_channel] = version_artifact
+            return 200  # Success
+        return 400  # Fail
     
-if __name__ == "__main__":
-    env = Env()
+    def clear_ota_channel(self, ota_channel: str):
+        if ota_channel in self.ota_channels:
+            self.ota_channels[ota_channel] = None
+            return 200  # Success
+        return 400  # Fail

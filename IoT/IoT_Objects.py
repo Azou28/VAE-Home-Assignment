@@ -62,20 +62,27 @@ class Endpoint:
     def check_backlog(self):
         return self.backlog == 0
     
+    def check_hw_type(self, version_artifact:str):
+        va_upper = version_artifact.upper()
+        hw_type_upper = self.hardware_type.upper()
+        return va_upper.startswith(hw_type_upper)
     
         # Logic methods
-    def update_version(self, new_version):
-        if self.check_backlog() and self.check_threshold():
-            self.version = new_version
-            return True
-        else:
+    def dfu_update(self, version_artifact:str):
+        version_number = int(version_artifact.split("_")[-1][:-4])
+        if version_number <= self.version: # no update needed
             return False
+        if self.check_backlog() and self.check_threshold():
+            if self.check_hw_type(version_artifact):
+                self.version = version_number
+                return True
+        return False
         
 class Node:
     def __init__(self, hardware_type:str, version:int=0):
 
         self.hardware_type = hardware_type  # type: str
-        self.uuid = hardware_type.upper()+ "_" + gen_string(8)
+        self.uuid = hardware_type.upper()+ "_" + gen_string()
         self.ota_channel = "OTA_" + self.uuid
         self.version = version
         self.endpoints = [Endpoint("EP1"),Endpoint("EP2"),Endpoint("Canary_A")]  # List of endpoint objects
@@ -88,8 +95,8 @@ class Node:
 
     # Setters and Getters
 
-    def get_version(self) -> str:
-        return str(self.version)
+    def get_version(self):
+        return self.version
     def get_ota_channel(self) -> str:
         return self.ota_channel
     def get_endpoints(self) -> list:
@@ -105,12 +112,17 @@ class Node:
     
 
     def check_hw_type(self, version_artifact:str):
-        return version_artifact.startswith(self.hardware_type)
+        va_upper = version_artifact.upper()
+        hw_type_upper = self.hardware_type.upper()
+        return va_upper.startswith(hw_type_upper)
 
 
     # Logic methods
     def update_version(self, ota_channel:str, version_artifact:str):
+        version_number = int(version_artifact.split("_")[-1][:-4])
+        if version_number <= self.version: # no update needed
+            return False
         if self.check_ota_channel(ota_channel) and self.check_hw_type(version_artifact):
-            self.version = int(version_artifact.split("_")[-1][:-4])
+            self.version = version_number
             return True
         return False
