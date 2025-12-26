@@ -59,6 +59,7 @@ class Endpoint:
     def check_backlog(self):
         return self.backlog == 0
     
+    
         # Logic methods
     def update_version(self, new_version):
         if self.check_backlog() and self.check_threshold():
@@ -77,13 +78,30 @@ class Node:
         self.endpoints = [Endpoint("EP1"),Endpoint("EP2"),Endpoint("Canary_A")]  # List of endpoint objects
 
     # Setters and Getters
-    def set_version(self, version):
-        self.version = version
-    def get_version(self):
-        return self.version
-    def get_ota_channel(self):
+
+    def get_version(self) -> str:
+        return str(self.version)
+    def get_ota_channel(self) -> str:
         return self.ota_channel
-    def get_endpoints(self):
-        for ep in self.endpoints:
-            print(f"Endpoint Serial Number: {ep.get_serial_number()}")
-            
+    def get_endpoints(self) -> list:
+        return self.endpoints
+    def get_uuid(self) -> str:
+        return self.uuid
+    
+    # Constraints check
+    def check_ota_channel(self, ota_channel:str):
+        if ota_channel == self.ota_channel:
+            return True
+        return False
+    
+
+    def check_hw_type(self, version_artifact:str):
+        return version_artifact.startswith(self.hardware_type)
+
+
+    # Logic methods
+    def update_version(self, ota_channel:str, version_artifact:str):
+        if self.check_ota_channel(ota_channel) and self.check_hw_type(version_artifact):
+            self.version = int(version_artifact.split("_")[-1][:-4])
+            return True
+        return False
