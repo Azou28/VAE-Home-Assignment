@@ -7,8 +7,7 @@ Suite Setup       Reset Test Environment
 Test Setup        Reset Test Environment
 
 *** Variables ***
-# UUIDs based on your current generator defaults and node creation order.
-# If you change counters/start values, update these 3 lines.
+# Node UUIDs
 ${UUID_AHN2}      AHN2_node-1000
 ${UUID_CASSIA}    CASSIA_node-1001
 ${UUID_MOXA}      MOXA_node-1002
