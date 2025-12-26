@@ -22,7 +22,7 @@ def reset_counters():
     endpoint_counter = 10000
     
 class Endpoint:
-    def __init__(self, hardware_type:str, serial_number:str =None):
+    def __init__(self, hardware_type:str, uuid:str =None):
         # Attributes
         if hardware_type == "EP1" or hardware_type == "EP2":
             self.battery_threshold = 2500
@@ -35,6 +35,7 @@ class Endpoint:
         self.backlog = 0  # default backlog
         self.version = 0  # default version
         self.hardware_type = hardware_type
+        self.uuid = uuid
         self.serial_number = hardware_type.upper() + "_" + str(generate_endpoint_serial())
 
     # Setters and Getters
@@ -57,6 +58,9 @@ class Endpoint:
         return self.serial_number
     def get_hardware_type(self):    
         return self.hardware_type
+    
+    def get_uuid(self):
+        return self.uuid
     # Constraints checks
     
     def check_threshold(self):
@@ -88,7 +92,7 @@ class Node:
         self.uuid = hardware_type.upper()+ "_" + str(generate_node_uuid())  # Unique identifier
         self.ota_channel = "OTA_" + self.uuid
         self.version = version
-        self.endpoints = [Endpoint("EP1"),Endpoint("EP2"),Endpoint("Canary_A")]  # List of endpoint objects
+        self.endpoints = [Endpoint("EP1",self.uuid),Endpoint("EP2",self.uuid),Endpoint("Canary_A",self.uuid)]  # List of endpoint objects
 
         if hardware_type.upper() == "MOXA":
             self.api_address = "moxa_api.azure"

@@ -4,10 +4,11 @@ class Env:
         self.nodes = [Node("ahn2"),Node("cassia"),Node("moxa")]
         # map ota_channel -> current artifact/version
         self.ota_channels = {node.get_ota_channel(): None for node in self.nodes}
+        self.dfu_channels = {"EP1": None, "EP2": None, "Canary_A": None}
         
     def reset_env(self):
-        self.__init__()
         reset_counters()
+        self.__init__()
         
     def debug_print(self):
         for node in self.nodes:
@@ -31,20 +32,47 @@ class Env:
                 return node_data
         return None
     
-    def get_ep_by_serial(self, serial_number: str) -> dict:
+    def get_ep_by_serial(self, serial_number: str):
         for node in self.nodes:
             for ep in node.endpoints:
                 if ep.get_serial_number() == serial_number:
-                    ep_data = {
-                        "serial_number": ep.get_serial_number(),
-                        "battery": ep.get_battery(),
-                        "hardware_type": ep.get_hardware_type(),
-                        "uuid": node.get_uuid(),
-                        "version": ep.get_version()
-                    }
-                    return ep_data
+                    return ep
         return None
     
+    def ep_to_dict(self, ep) -> dict:
+        ep_data = {
+            "serial_number": ep.get_serial_number(),
+            "battery": ep.get_battery(),
+            "hardware_type": ep.get_hardware_type(),
+            "uuid": ep.get_uuid(),
+            "version": ep.get_version()
+        }
+        return ep_data
+    
+    def get_ep_dict_by_serial(self, serial_number: str):
+        for node in self.nodes:
+            for ep in node.endpoints:
+                if ep.get_serial_number() == serial_number:
+                    ep_to_dict = self.ep_to_dict(ep)
+                    return ep_to_dict
+        return None
+
+    
+    def set_ep_battery(self, serial_number: str, battery: int) -> int:
+        ep = self.get_ep_by_serial(serial_number)
+        if ep is None:
+            return 400
+        ep.set_battery(int(battery))
+        return 200
+    
+    def set_ep_backlog(self, serial_number: str, backlog: int) -> int:
+        ep = self.get_ep_by_serial(serial_number)
+        if ep is None:
+            return 400
+        ep.set_backlog(int(backlog))
+        return 200
+    
+    # ---- OTA helpers ----
     def post_version_to_ota_channel(self, ota_channel: str, version_artifact: str):
         if ota_channel in self.ota_channels:
             self.ota_channels[ota_channel] = version_artifact
@@ -68,6 +96,39 @@ class Env:
         return 200  # Success
         
 
+    # ---- DFU helpers ----
+    
+    def post_version_to_dfu_channel(self, hardware_type: str, version_artifact: str):
+        hw = str(hardware_type)
+        if hw in self.dfu_channels:
+            self.dfu_channels[hw] = version_artifact
+            return 200
+        return 400
                 
-            
-            
+    def clear_dfu_channel(self, hardware_type: str):
+        hw = str(hardware_type)
+        if hw in self.dfu_channels:
+            self.dfu_channels[hw] = None
+            return 200
+        return 400
+    
+    def apply_dfu_updates_for_node(self, node_uuid: str):
+        """Try to DFU-update all endpoints that belong to a given node.
+
+        Returns 200 if node exists (even if no endpoint updated), 400 if node not found.
+        """
+        target_node = None
+        for node in self.nodes:
+            if node.get_uuid() == node_uuid:
+                target_node = node
+                break
+        if target_node is None:
+            return 400
+                # For each endpoint, attempt update with the artifact for its HW type (if any)
+        for ep in target_node.endpoints:
+            artifact = self.dfu_channels.get(ep.get_hardware_type())
+            if artifact is None:
+                continue
+            ep.dfu_update(artifact)
+        return 200
+        
