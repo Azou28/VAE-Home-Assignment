@@ -4,6 +4,7 @@ import string
 
 
 starting_sn = 1000
+starting_string = 0xA0000
 
 def gen_sn():
     global starting_sn
@@ -11,9 +12,11 @@ def gen_sn():
     starting_sn += 1
     return sn
     
-def gen_string(length):
-    letters = string.ascii_uppercase + string.digits
-    return ''.join(random.choice(letters) for i in range(length))
+def gen_string():
+    global starting_string
+    s = hex(starting_string)[2:].upper()
+    starting_string += 1
+    return s
 
 class Endpoint:
     def __init__(self, hardware_type:str):
@@ -76,6 +79,12 @@ class Node:
         self.ota_channel = "OTA_" + self.uuid
         self.version = version
         self.endpoints = [Endpoint("EP1"),Endpoint("EP2"),Endpoint("Canary_A")]  # List of endpoint objects
+
+        if hardware_type.upper() == "MOXA":
+            self.api_address = "moxa_api.azure"
+        else:
+            self.api_address = "buildroot_api.azure"
+        
 
     # Setters and Getters
 
