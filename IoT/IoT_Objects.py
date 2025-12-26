@@ -1,25 +1,28 @@
+node_counter = 1000
+endpoint_counter = 10000
 
-import random
-import string
+
+def generate_node_uuid() -> str:
+    global node_counter
+    uuid = f"node-{node_counter}"
+    node_counter += 1
+    return uuid
 
 
-starting_sn = 1000
-starting_string = 0xA0000
+def generate_endpoint_serial() -> str:
+    global endpoint_counter
+    serial = f"ep-{endpoint_counter}"
+    endpoint_counter += 1
+    return serial
 
-def gen_sn():
-    global starting_sn
-    sn = starting_sn
-    starting_sn += 1
-    return sn
+
+def reset_counters():
+    global node_counter, endpoint_counter
+    node_counter = 1000
+    endpoint_counter = 10000
     
-def gen_string():
-    global starting_string
-    s = hex(starting_string)[2:].upper()
-    starting_string += 1
-    return s
-
 class Endpoint:
-    def __init__(self, hardware_type:str):
+    def __init__(self, hardware_type:str, serial_number:str =None):
         # Attributes
         if hardware_type == "EP1" or hardware_type == "EP2":
             self.battery_threshold = 2500
@@ -32,7 +35,7 @@ class Endpoint:
         self.backlog = 0  # default backlog
         self.version = 0  # default version
         self.hardware_type = hardware_type
-        self.serial_number = hardware_type.upper() + "_" + str(gen_sn())
+        self.serial_number = hardware_type.upper() + "_" + str(generate_endpoint_serial())
 
     # Setters and Getters
     def set_battery(self, battery_level):
@@ -79,10 +82,10 @@ class Endpoint:
         return False
         
 class Node:
-    def __init__(self, hardware_type:str, version:int=0):
+    def __init__(self, hardware_type:str, version:int=33):
 
         self.hardware_type = hardware_type  # type: str
-        self.uuid = hardware_type.upper()+ "_" + gen_string()
+        self.uuid = hardware_type.upper()+ "_" + str(generate_node_uuid())  # Unique identifier
         self.ota_channel = "OTA_" + self.uuid
         self.version = version
         self.endpoints = [Endpoint("EP1"),Endpoint("EP2"),Endpoint("Canary_A")]  # List of endpoint objects

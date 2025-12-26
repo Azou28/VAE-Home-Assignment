@@ -1,15 +1,7 @@
 from IoT_Environment import Env
 
-def api_init_environment():
-    global env
-    env = Env()
+env = Env()
     
-def api_get_all_nodes() -> list:
-    nodes_list = []
-    for node in env.nodes:
-        nodes_list.append(node.get_uuid())
-    return nodes_list
-
 def api_get_node_by_uuid(uuid: str) -> dict:
     node = env.get_node(uuid)
     if node is None:
@@ -26,16 +18,13 @@ def api_post_version_to_ota_channel(ota_channel: str, version_artifact: str) -> 
     # Adds new version to channel
     return env.post_version_to_ota_channel(ota_channel, version_artifact)
 
-def api_clear_ota_channel(ota_channel: str) -> int:
+def api_clear_ota_channel(ota_channel: str,version_artifact: str) -> int:
     # Clear an artifact from the OTA channel
     return env.clear_ota_channel(ota_channel)
 
-def api_set_node_version(uuid: str, version: int):
-    for node in env.nodes:
-        if node.uuid == uuid:
-            node.version = version
-            return 200
-    return 400
+def api_apply_ota_updates(ota_channel: str) -> int:
+    return env.apply_ota_updates(ota_channel)
+
 
 def api_reset_environment():
     env.reset_env()

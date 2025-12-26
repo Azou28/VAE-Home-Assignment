@@ -1,5 +1,4 @@
-from IoT_Objects import Node
-
+from IoT_Objects import Node,reset_counters
 class Env:
     def __init__(self):
         self.nodes = [Node("ahn2"),Node("cassia"),Node("moxa")]
@@ -8,15 +7,14 @@ class Env:
         
     def reset_env(self):
         self.__init__()
-        global starting_sn,starting_string
-        starting_string = 0xA0000
-        starting_sn = 1000 
+        reset_counters()
         
     def debug_print(self):
         for node in self.nodes:
                     print(f"Node UUID: {node.uuid}")
                     for ep in node.endpoints:
                         print(f"Endpoint Serial Number: {ep.get_serial_number()}")
+    
     def get_node(self, uuid: str) -> dict:
         for node in self.nodes:
             if node.uuid == uuid:
@@ -58,3 +56,18 @@ class Env:
             self.ota_channels[ota_channel] = None
             return 200  # Success
         return 400  # Fail
+
+    def apply_ota_updates(self,ota_channel: str):
+        if ota_channel not in self.ota_channels:
+            return 400  # Fail
+        version_artifact = self.ota_channels[ota_channel]
+        if version_artifact is None:
+            return 400  # Fail
+        for node in self.nodes:
+            node.update_version(ota_channel,version_artifact)
+        return 200  # Success
+        
+
+                
+            
+            
