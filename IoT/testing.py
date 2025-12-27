@@ -38,22 +38,22 @@ def test_endpoint_dfu_backlog():
             print(f"Endpoint data after setting backlog to {i}: {ep}")
 
 def Bad_Firmaware_OTA_Test():
-    node = api.api_get_node_by_uuid("MOXA_node-2000")
+    node = api.api_get_node_by_uuid("MOXA_node-1002")
     print(f"Node data: {node}")
 
-    rc = api.api_post_version_to_ota_channel("OTA_MOXA_node-2000", "AHN2_34.swu")
+    rc = api.api_post_version_to_ota_channel("OTA_MOXA_node-1002", "AHN2_34.swu")
     print(f"Post bad OTA version to channel RC: {rc}")
 
-    rc = api.api_apply_ota_updates("OTA_MOXA_node-2000")
+    rc = api.api_apply_ota_updates("OTA_MOXA_node-1002")
     print(f"Apply OTA updates RC: {rc}")
 
-    node = api.api_get_node_by_uuid("MOXA_node-2000")
+    node = api.api_get_node_by_uuid("MOXA_node-1002")
     print(f"Node data after bad OTA update attempt: {node}")    
 
 if __name__ == "__main__":
-    OTA_Happy_Flow_Test()
+    # OTA_Happy_Flow_Test()
     Bad_Firmaware_OTA_Test()
-    test_endpoint_dfu_backlog()
+    # test_endpoint_dfu_backlog()
     # api.api_debug_print_environment()
 
 

@@ -92,8 +92,9 @@ class Env:
         if version_artifact is None:
             return 400  # Fail
         for node in self.nodes:
-            node.update_version(ota_channel,version_artifact)
-        return 200  # Success
+            if node.update_version(ota_channel,version_artifact):
+                return 200  # Success
+        return 201  # No update applied
         
 
     # ---- DFU helpers ----
