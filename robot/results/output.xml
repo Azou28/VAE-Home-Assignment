@@ -1,431 +1,431 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.1 (Python 3.12.10 on win32)" generated="2025-12-27T10:39:40.024666" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4.1 (Python 3.12.10 on win32)" generated="2025-12-27T11:01:31.786394" rpa="false" schemaversion="5">
 <suite id="s1" name="Robot Tests" source="C:\Users\aviva_i2qfrah\python\Augury-Home-Assignment\robot\Robot_Tests.robot">
 <kw name="Reset Test Environment" type="SETUP">
 <kw name="Api Reset Environment" owner="AuguryAPI">
-<status status="PASS" start="2025-12-27T10:39:40.077029" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.838984" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-12-27T10:39:40.076023" elapsed="0.001006"/>
+<status status="PASS" start="2025-12-27T11:01:31.838984" elapsed="0.001000"/>
 </kw>
 <test id="s1-t1" name="OTA Happy Flow - Update MOXA from 33 to 34" line="19">
 <kw name="Reset Test Environment" type="SETUP">
 <kw name="Api Reset Environment" owner="AuguryAPI">
-<status status="PASS" start="2025-12-27T10:39:40.078029" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.839984" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-12-27T10:39:40.078029" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.839984" elapsed="0.000000"/>
 </kw>
 <kw name="Api Get Node By Uuid" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.078029" level="INFO">${node} = {'uuid': 'MOXA_node-1002', 'ota_channel': 'OTA_MOXA_node-1002', 'version': 33, 'Endpoints': ['EP1_ep-10006', 'EP2_ep-10007', 'CANARY_A_ep-10008']}</msg>
+<msg time="2025-12-27T11:01:31.841043" level="INFO">${node} = {'uuid': 'MOXA_node-1002', 'ota_channel': 'OTA_MOXA_node-1002', 'version': 33, 'Endpoints': ['EP1_ep-10006', 'EP2_ep-10007', 'CANARY_A_ep-10008']}</msg>
 <var>${node}</var>
 <arg>${UUID_MOXA}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.078029" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.841043" elapsed="0.000000"/>
 </kw>
 <kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.079029" level="INFO">Length is 4.</msg>
+<msg time="2025-12-27T11:01:31.842026" level="INFO">Length is 4.</msg>
 <arg>${node}</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.079029" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.841043" elapsed="0.000983"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.080029" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.842983" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${node["version"]}</arg>
 <arg>${START_VERSION}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.079029" elapsed="0.001000"/>
+<status status="PASS" start="2025-12-27T11:01:31.842026" elapsed="0.000957"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.081029" level="INFO">${ota_channel} = OTA_MOXA_node-1002</msg>
+<msg time="2025-12-27T11:01:31.842983" level="INFO">${ota_channel} = OTA_MOXA_node-1002</msg>
 <var>${ota_channel}</var>
 <arg>${node["ota_channel"]}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.080029" elapsed="0.001000"/>
+<status status="PASS" start="2025-12-27T11:01:31.842983" elapsed="0.000000"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.081251" level="INFO">${artifact} = MOXA_34.swu</msg>
+<msg time="2025-12-27T11:01:31.844084" level="INFO">${artifact} = MOXA_34.swu</msg>
 <var>${artifact}</var>
 <arg>MOXA_${NEW_VERSION}.swu</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.081251" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.844084" elapsed="0.000000"/>
 </kw>
 <kw name="Api Post Version To Ota Channel" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.081251" level="INFO">${rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.844612" level="INFO">${rc} = 200</msg>
 <var>${rc}</var>
 <arg>${ota_channel}</arg>
 <arg>${artifact}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.081251" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.844612" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.082257" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.844992" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.082257" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.844992" elapsed="0.000000"/>
 </kw>
 <kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
 <kw name="Apply Ota Should Succeed">
 <kw name="Api Apply Ota Updates" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.083300" level="INFO">${rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.846091" level="INFO">${rc} = 200</msg>
 <var>${rc}</var>
 <arg>${ota_channel}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.083300" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.846091" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.083300" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.846091" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.083300" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.846091" elapsed="0.000000"/>
 </kw>
 <arg>${ota_channel}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.083300" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.846091" elapsed="0.000000"/>
 </kw>
 <arg>5x</arg>
 <arg>0.2s</arg>
 <arg>Apply Ota Should Succeed</arg>
 <arg>${ota_channel}</arg>
 <doc>Runs the specified keyword and retries if it fails.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.082257" elapsed="0.001043"/>
+<status status="PASS" start="2025-12-27T11:01:31.844992" elapsed="0.001099"/>
 </kw>
 <kw name="Api Get Node By Uuid" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.084258" level="INFO">${node_after} = {'uuid': 'MOXA_node-1002', 'ota_channel': 'OTA_MOXA_node-1002', 'version': 34, 'Endpoints': ['EP1_ep-10006', 'EP2_ep-10007', 'CANARY_A_ep-10008']}</msg>
+<msg time="2025-12-27T11:01:31.847099" level="INFO">${node_after} = {'uuid': 'MOXA_node-1002', 'ota_channel': 'OTA_MOXA_node-1002', 'version': 34, 'Endpoints': ['EP1_ep-10006', 'EP2_ep-10007', 'CANARY_A_ep-10008']}</msg>
 <var>${node_after}</var>
 <arg>${UUID_MOXA}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.084258" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.847099" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.085302" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.848140" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${node_after["version"]}</arg>
 <arg>${NEW_VERSION}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.084258" elapsed="0.001044"/>
+<status status="PASS" start="2025-12-27T11:01:31.847099" elapsed="0.001041"/>
 </kw>
 <doc>Upload valid MOXA firmware to MOXA OTA channel and apply update.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.077029" elapsed="0.008273"/>
+<status status="PASS" start="2025-12-27T11:01:31.839984" elapsed="0.008156"/>
 </test>
 <test id="s1-t2" name="Bad Firmware OTA - MOXA should NOT update from AHN2 artifact" line="37">
 <kw name="Reset Test Environment" type="SETUP">
 <kw name="Api Reset Environment" owner="AuguryAPI">
-<status status="PASS" start="2025-12-27T10:39:40.087258" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.850157" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-12-27T10:39:40.087258" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.849096" elapsed="0.001061"/>
 </kw>
 <kw name="Api Get Node By Uuid" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.088259" level="INFO">${node} = {'uuid': 'MOXA_node-1002', 'ota_channel': 'OTA_MOXA_node-1002', 'version': 33, 'Endpoints': ['EP1_ep-10006', 'EP2_ep-10007', 'CANARY_A_ep-10008']}</msg>
+<msg time="2025-12-27T11:01:31.850157" level="INFO">${node} = {'uuid': 'MOXA_node-1002', 'ota_channel': 'OTA_MOXA_node-1002', 'version': 33, 'Endpoints': ['EP1_ep-10006', 'EP2_ep-10007', 'CANARY_A_ep-10008']}</msg>
 <var>${node}</var>
 <arg>${UUID_MOXA}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.088259" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.850157" elapsed="0.000000"/>
 </kw>
 <kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.088259" level="INFO">Length is 4.</msg>
+<msg time="2025-12-27T11:01:31.851099" level="INFO">Length is 4.</msg>
 <arg>${node}</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.088259" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.851099" elapsed="0.000000"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.089313" level="INFO">${ota_channel} = OTA_MOXA_node-1002</msg>
+<msg time="2025-12-27T11:01:31.852128" level="INFO">${ota_channel} = OTA_MOXA_node-1002</msg>
 <var>${ota_channel}</var>
 <arg>${node["ota_channel"]}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.089313" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.851099" elapsed="0.001029"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.090256" level="INFO">${bad_artifact} = AHN2_34.swu</msg>
+<msg time="2025-12-27T11:01:31.852128" level="INFO">${bad_artifact} = AHN2_34.swu</msg>
 <var>${bad_artifact}</var>
 <arg>AHN2_${NEW_VERSION}.swu</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.090256" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.852128" elapsed="0.000000"/>
 </kw>
 <kw name="Api Post Version To Ota Channel" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.090256" level="INFO">${rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.853099" level="INFO">${rc} = 200</msg>
 <var>${rc}</var>
 <arg>${ota_channel}</arg>
 <arg>${bad_artifact}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.090256" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.853099" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.091299" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.853099" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.091299" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.853099" elapsed="0.000000"/>
 </kw>
 <kw name="Api Apply Ota Updates" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.091299" level="INFO">${apply_rc} = 201</msg>
+<msg time="2025-12-27T11:01:31.854102" level="INFO">${apply_rc} = 201</msg>
 <var>${apply_rc}</var>
 <arg>${ota_channel}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.091299" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.854102" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.092290" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.855099" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${apply_rc}</arg>
 <arg>201</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.092290" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.854102" elapsed="0.000997"/>
 </kw>
 <kw name="Api Get Node By Uuid" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.093257" level="INFO">${node_after} = {'uuid': 'MOXA_node-1002', 'ota_channel': 'OTA_MOXA_node-1002', 'version': 33, 'Endpoints': ['EP1_ep-10006', 'EP2_ep-10007', 'CANARY_A_ep-10008']}</msg>
+<msg time="2025-12-27T11:01:31.855099" level="INFO">${node_after} = {'uuid': 'MOXA_node-1002', 'ota_channel': 'OTA_MOXA_node-1002', 'version': 33, 'Endpoints': ['EP1_ep-10006', 'EP2_ep-10007', 'CANARY_A_ep-10008']}</msg>
 <var>${node_after}</var>
 <arg>${UUID_MOXA}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.093257" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.855099" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.093257" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.857099" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${node_after["version"]}</arg>
 <arg>${START_VERSION}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.093257" elapsed="0.001034"/>
+<status status="PASS" start="2025-12-27T11:01:31.856110" elapsed="0.000989"/>
 </kw>
 <kw name="Api Get Node By Uuid" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.094291" level="INFO">${node} = {'uuid': 'AHN2_node-1000', 'ota_channel': 'OTA_AHN2_node-1000', 'version': 33, 'Endpoints': ['EP1_ep-10000', 'EP2_ep-10001', 'CANARY_A_ep-10002']}</msg>
+<msg time="2025-12-27T11:01:31.858099" level="INFO">${node} = {'uuid': 'AHN2_node-1000', 'ota_channel': 'OTA_AHN2_node-1000', 'version': 33, 'Endpoints': ['EP1_ep-10000', 'EP2_ep-10001', 'CANARY_A_ep-10002']}</msg>
 <var>${node}</var>
 <arg>${UUID_AHN2}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.094291" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.857099" elapsed="0.001000"/>
 </kw>
 <kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.094291" level="INFO">Length is 4.</msg>
+<msg time="2025-12-27T11:01:31.858099" level="INFO">Length is 4.</msg>
 <arg>${node}</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.094291" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.858099" elapsed="0.000000"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.095293" level="INFO">${ota_channel} = OTA_AHN2_node-1000</msg>
+<msg time="2025-12-27T11:01:31.860115" level="INFO">${ota_channel} = OTA_AHN2_node-1000</msg>
 <var>${ota_channel}</var>
 <arg>${node["ota_channel"]}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.095293" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.859101" elapsed="0.001014"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.096291" level="INFO">${artifact} = AHN2_34.swu</msg>
+<msg time="2025-12-27T11:01:31.860115" level="INFO">${artifact} = AHN2_34.swu</msg>
 <var>${artifact}</var>
 <arg>AHN2_${NEW_VERSION}.swu</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.095293" elapsed="0.000998"/>
+<status status="PASS" start="2025-12-27T11:01:31.860115" elapsed="0.000000"/>
 </kw>
 <kw name="Api Post Version To Ota Channel" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.096291" level="INFO">${rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.861136" level="INFO">${rc} = 200</msg>
 <var>${rc}</var>
 <arg>${ota_channel}</arg>
 <arg>${artifact}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.096291" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.860115" elapsed="0.001021"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.097289" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.861368" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.096291" elapsed="0.000998"/>
+<status status="PASS" start="2025-12-27T11:01:31.861368" elapsed="0.000000"/>
 </kw>
 <kw name="Api Clear Ota Channel" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.097289" level="INFO">${clear_rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.861939" level="INFO">${clear_rc} = 200</msg>
 <var>${clear_rc}</var>
 <arg>${ota_channel}</arg>
 <arg>${artifact}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.097289" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.861939" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.098257" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.861939" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${clear_rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.098257" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.861939" elapsed="0.000000"/>
 </kw>
 <kw name="Api Apply Ota Updates" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.098257" level="INFO">${apply_rc} = 400</msg>
+<msg time="2025-12-27T11:01:31.862980" level="INFO">${apply_rc} = 400</msg>
 <var>${apply_rc}</var>
 <arg>${ota_channel}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.098257" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.862980" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.099256" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.862980" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${apply_rc}</arg>
 <arg>400</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.099256" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.862980" elapsed="0.000000"/>
 </kw>
 <doc>Clear channel and ensure apply fails (no artifact).</doc>
-<status status="PASS" start="2025-12-27T10:39:40.086257" elapsed="0.013562"/>
+<status status="PASS" start="2025-12-27T11:01:31.849096" elapsed="0.014884"/>
 </test>
 <test id="s1-t3" name="Endpoint DFU with Backlog and Battery Constraints" line="72">
 <kw name="Reset Test Environment" type="SETUP">
 <kw name="Api Reset Environment" owner="AuguryAPI">
-<status status="PASS" start="2025-12-27T10:39:40.101304" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.864975" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-12-27T10:39:40.100139" elapsed="0.001165"/>
+<status status="PASS" start="2025-12-27T11:01:31.864975" elapsed="0.000000"/>
 </kw>
 <kw name="Api Get Node By Uuid" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.101304" level="INFO">${node} = {'uuid': 'AHN2_node-1000', 'ota_channel': 'OTA_AHN2_node-1000', 'version': 33, 'Endpoints': ['EP1_ep-10000', 'EP2_ep-10001', 'CANARY_A_ep-10002']}</msg>
+<msg time="2025-12-27T11:01:31.865946" level="INFO">${node} = {'uuid': 'AHN2_node-1000', 'ota_channel': 'OTA_AHN2_node-1000', 'version': 33, 'Endpoints': ['EP1_ep-10000', 'EP2_ep-10001', 'CANARY_A_ep-10002']}</msg>
 <var>${node}</var>
 <arg>${UUID_AHN2}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.101304" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.864975" elapsed="0.000971"/>
 </kw>
 <kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.102346" level="INFO">Length is 4.</msg>
+<msg time="2025-12-27T11:01:31.865946" level="INFO">Length is 4.</msg>
 <arg>${node}</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.101304" elapsed="0.001042"/>
+<status status="PASS" start="2025-12-27T11:01:31.865946" elapsed="0.000000"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.103344" level="INFO">${ep1_serial} = EP1_ep-10000</msg>
+<msg time="2025-12-27T11:01:31.866978" level="INFO">${ep1_serial} = EP1_ep-10000</msg>
 <var>${ep1_serial}</var>
 <arg>${node["Endpoints"][0]}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.102346" elapsed="0.000998"/>
+<status status="PASS" start="2025-12-27T11:01:31.865946" elapsed="0.001032"/>
 </kw>
 <kw name="Api Get Endpoint By Serial" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.104315" level="INFO">${ep1} = {'serial_number': 'EP1_ep-10000', 'battery': 4000, 'backlog': 0, 'hardware_type': 'EP1', 'uuid': 'AHN2_node-1000', 'version': 33}</msg>
+<msg time="2025-12-27T11:01:31.866978" level="INFO">${ep1} = {'serial_number': 'EP1_ep-10000', 'battery': 4000, 'backlog': 0, 'hardware_type': 'EP1', 'uuid': 'AHN2_node-1000', 'version': 33}</msg>
 <var>${ep1}</var>
 <arg>${ep1_serial}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.104315" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.866978" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${ep1["hardware_type"]}</arg>
 <arg>EP1</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.104315" elapsed="0.000998"/>
+<status status="PASS" start="2025-12-27T11:01:31.867946" elapsed="0.000000"/>
 </kw>
 <kw name="Api Set Endpoint Backlog" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.106313" level="INFO">${rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.867946" level="INFO">${rc} = 200</msg>
 <var>${rc}</var>
 <arg>${ep1_serial}</arg>
 <arg>5</arg>
-<status status="PASS" start="2025-12-27T10:39:40.105313" elapsed="0.001000"/>
+<status status="PASS" start="2025-12-27T11:01:31.867946" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.106313" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.868959" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.106313" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.868959" elapsed="0.000000"/>
 </kw>
 <kw name="Api Set Endpoint Battery" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.107312" level="INFO">${rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.868959" level="INFO">${rc} = 200</msg>
 <var>${rc}</var>
 <arg>${ep1_serial}</arg>
 <arg>3000</arg>
-<status status="PASS" start="2025-12-27T10:39:40.107312" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.868959" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.108319" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.869946" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.107312" elapsed="0.001007"/>
+<status status="PASS" start="2025-12-27T11:01:31.869946" elapsed="0.000000"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.108319" level="INFO">${dfu_artifact} = EP1_34.swu</msg>
+<msg time="2025-12-27T11:01:31.870977" level="INFO">${dfu_artifact} = EP1_34.swu</msg>
 <var>${dfu_artifact}</var>
 <arg>EP1_${NEW_VERSION}.swu</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.108319" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.869946" elapsed="0.001031"/>
 </kw>
 <kw name="Api Apply Dfu Updates For Endpoint" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.109313" level="INFO">${rc} = 201</msg>
+<msg time="2025-12-27T11:01:31.870977" level="INFO">${rc} = 201</msg>
 <var>${rc}</var>
 <arg>${ep1_serial}</arg>
 <arg>${dfu_artifact}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.109313" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.870977" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.109313" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.871981" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>201</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.109313" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.870977" elapsed="0.001004"/>
 </kw>
 <kw name="Api Get Endpoint By Serial" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.110310" level="INFO">${ep1_after} = {'serial_number': 'EP1_ep-10000', 'battery': 3000, 'backlog': 5, 'hardware_type': 'EP1', 'uuid': 'AHN2_node-1000', 'version': 33}</msg>
+<msg time="2025-12-27T11:01:31.871981" level="INFO">${ep1_after} = {'serial_number': 'EP1_ep-10000', 'battery': 3000, 'backlog': 5, 'hardware_type': 'EP1', 'uuid': 'AHN2_node-1000', 'version': 33}</msg>
 <var>${ep1_after}</var>
 <arg>${ep1_serial}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.110310" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.871981" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.111348" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.872976" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${ep1_after["version"]}</arg>
 <arg>33</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.110310" elapsed="0.001038"/>
+<status status="PASS" start="2025-12-27T11:01:31.871981" elapsed="0.000995"/>
 </kw>
 <kw name="Api Set Endpoint Backlog" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.111348" level="INFO">${rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.873948" level="INFO">${rc} = 200</msg>
 <var>${rc}</var>
 <arg>${ep1_serial}</arg>
 <arg>0</arg>
-<status status="PASS" start="2025-12-27T10:39:40.111348" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.873948" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.111348" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.874948" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.111348" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.873948" elapsed="0.001000"/>
 </kw>
 <kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
 <kw name="DFU Should Update Endpoint">
 <kw name="Api Apply Dfu Updates For Endpoint" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.113345" level="INFO">${rc} = 200</msg>
+<msg time="2025-12-27T11:01:31.876963" level="INFO">${rc} = 200</msg>
 <var>${rc}</var>
 <arg>${serial}</arg>
 <arg>${version_artifact}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.113345" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.876963" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.113345" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.876963" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${rc}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.113345" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.876963" elapsed="0.000000"/>
 </kw>
 <kw name="Api Get Endpoint By Serial" owner="AuguryAPI">
-<msg time="2025-12-27T10:39:40.113345" level="INFO">${ep} = {'serial_number': 'EP1_ep-10000', 'battery': 3000, 'backlog': 0, 'hardware_type': 'EP1', 'uuid': 'AHN2_node-1000', 'version': 34}</msg>
+<msg time="2025-12-27T11:01:31.877973" level="INFO">${ep} = {'serial_number': 'EP1_ep-10000', 'battery': 3000, 'backlog': 0, 'hardware_type': 'EP1', 'uuid': 'AHN2_node-1000', 'version': 34}</msg>
 <var>${ep}</var>
 <arg>${serial}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.113345" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.877973" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-27T10:39:40.114346" level="INFO">Argument types are:
+<msg time="2025-12-27T11:01:31.877973" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${ep["version"]}</arg>
 <arg>${expected_version}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.114346" elapsed="0.000000"/>
+<status status="PASS" start="2025-12-27T11:01:31.877973" elapsed="0.000000"/>
 </kw>
 <arg>${ep1_serial}</arg>
 <arg>${dfu_artifact}</arg>
 <arg>${NEW_VERSION}</arg>
-<status status="PASS" start="2025-12-27T10:39:40.112346" elapsed="0.002000"/>
+<status status="PASS" start="2025-12-27T11:01:31.875956" elapsed="0.002017"/>
 </kw>
 <arg>5x</arg>
 <arg>0.2s</arg>
@@ -434,12 +434,12 @@
 <arg>${dfu_artifact}</arg>
 <arg>${NEW_VERSION}</arg>
 <doc>Runs the specified keyword and retries if it fails.</doc>
-<status status="PASS" start="2025-12-27T10:39:40.112346" elapsed="0.002000"/>
+<status status="PASS" start="2025-12-27T11:01:31.874948" elapsed="0.003025"/>
 </kw>
-<status status="PASS" start="2025-12-27T10:39:40.100139" elapsed="0.014207"/>
+<status status="PASS" start="2025-12-27T11:01:31.863980" elapsed="0.015002"/>
 </test>
 <doc>Robot tests for OTA behavior using AuguryAPI.py</doc>
-<status status="PASS" start="2025-12-27T10:39:40.025665" elapsed="0.089648"/>
+<status status="PASS" start="2025-12-27T11:01:31.788436" elapsed="0.091076"/>
 </suite>
 <statistics>
 <total>
