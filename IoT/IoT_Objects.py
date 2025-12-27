@@ -129,7 +129,10 @@ class Node:
 
     # Logic methods
     def update_version(self, ota_channel:str, version_artifact:str):
-        version_number = int(version_artifact.split("_")[-1][:-4])
+        try:
+            version_number = int(version_artifact.split("_")[-1][:-4])
+        except (AttributeError, IndexError, ValueError):
+            return False
         if version_number <= self.version: # no update needed
             return False
         if self.check_ota_channel(ota_channel) and self.check_hw_type(version_artifact):
