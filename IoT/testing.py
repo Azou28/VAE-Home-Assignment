@@ -23,8 +23,10 @@ def test_endpoint_dfu_backlog():
 
     rc = api.api_set_endpoint_battery("EP1_ep-10000", 3000)
     rc = api.api_set_endpoint_backlog("EP1_ep-10000", 5)
-   
+    
+    ep = api.api_get_endpoint_by_serial("EP1_ep-10000")
     print(f"Endpoint data: {ep}")
+    
     rc = api.api_apply_dfu_updates_for_endpoint("EP1_ep-10000", "EP1_34.swu")
     for i in range(5, -1, -1):
         rc = api.api_set_endpoint_backlog("EP1_ep-10000", i)
@@ -49,8 +51,8 @@ def Bad_Firmaware_OTA_Test():
     print(f"Node data after bad OTA update attempt: {node}")    
 
 if __name__ == "__main__":
-    # OTA_Happy_Flow_Test()
-    # Bad_Firmaware_OTA_Test()
+    OTA_Happy_Flow_Test()
+    Bad_Firmaware_OTA_Test()
     test_endpoint_dfu_backlog()
     # api.api_debug_print_environment()
 
