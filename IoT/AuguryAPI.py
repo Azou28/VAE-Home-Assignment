@@ -1,7 +1,10 @@
 from IoT_Environment import Env
 
 env = Env()
-    
+
+def api_debug_print_environment():
+    env.debug_print()
+
 def api_get_node_by_uuid(uuid: str) -> dict:
     node = env.get_node(uuid)
     if node is None:
@@ -27,17 +30,9 @@ def api_apply_ota_updates(ota_channel: str) -> int:
 
 
 # ---- DFU (Endpoint firmware update) helpers ----
-def api_post_version_to_dfu_channel(hardware_type: str, version_artifact: str) -> int:
-    """Publish an endpoint firmware artifact for a specific endpoint HW type (EP1/EP2/Canary_A)."""
-    return env.post_version_to_dfu_channel(hardware_type, version_artifact)
 
-
-def api_clear_dfu_channel(hardware_type: str) -> int:
-    return env.clear_dfu_channel(hardware_type)
-
-
-def api_apply_dfu_updates_for_node(node_uuid: str) -> int:
-    return env.apply_dfu_updates_for_node(node_uuid)
+def api_apply_dfu_updates_for_endpoint(serial_number: str, version_artifact: str) -> int:
+    return env.apply_dfu_updates_for_endpoint(serial_number,version_artifact)
 
 
 def api_set_endpoint_battery(serial_number: str, battery: int) -> int:

@@ -31,9 +31,9 @@ class Endpoint:
         else:
             raise ValueError("Unknown hardware type")
         
-        self.battery = 0  # default battery level
+        self.battery = 4000  # default battery level
         self.backlog = 0  # default backlog
-        self.version = 0  # default version
+        self.version = 33  # default version
         self.hardware_type = hardware_type
         self.uuid = uuid
         self.serial_number = hardware_type.upper() + "_" + str(generate_endpoint_serial())
@@ -46,6 +46,8 @@ class Endpoint:
     
     def set_backlog(self, backlog):
         self.backlog = backlog
+        return True
+        
     def get_backlog(self):
         return self.backlog
     
